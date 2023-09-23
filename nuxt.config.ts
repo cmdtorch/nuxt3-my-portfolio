@@ -32,8 +32,7 @@ export default defineNuxtConfig({
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL ?? '',
     name: process.env.NUXT_PUBLIC_SITE_NAME ?? '',
-    description: process.env.NUXT_PUBLIC_META_DESCRIPTION ?? '',
-    ogImage: '/og_image.jpg',
+    ogImage: process.env.NUXT_PUBLIC_META_OG_IMAGE ?? '',
     defaultLocale: 'en',
   },
   ogImage: {
@@ -99,19 +98,17 @@ export default defineNuxtConfig({
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? '',
       siteName: process.env.NUXT_PUBLIC_SITE_NAME ?? '',
+      sitePrimaryColor: process.env.NUXT_PUBLIC_SITE_PRIMARY_COLOR ?? '',
       apiBase: process.env.NUXT_PUBLIC_API_BASE ?? '',
-      apiHostName: process.env.NUXT_PUBLIC_API_HOST_NAME ?? '',
       iconLetter: process.env.NUXT_PUBLIC_ICON_LETTER ?? '',
       ownerName: process.env.NUXT_PUBLIC_OWNER_NAME ?? '',
       ownerLastName: process.env.NUXT_PUBLIC_OWNER_LAST_NAME ?? '',
-      metaDescription: process.env.NUXT_PUBLIC_META_DESCRIPTION ?? '',
-      metaKeywords: process.env.NUXT_PUBLIC_META_KEYWORDS ?? '',
     },
   },
   image: {
-    domains: [process.env.NUXT_PUBLIC_API_BASE ?? ''],
+    domains: [process.env.NUXT_IMAGE_DOMAIN ?? ''],
     alias: {
-      unsplash: process.env.NUXT_PUBLIC_API_BASE ?? '',
+      unsplash: `https://${process.env.NUXT_IMAGE_DOMAIN}`,
     },
   },
 })

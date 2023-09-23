@@ -23,18 +23,27 @@ defineOgImage({
     <div class="project__wrapper">
       <div class="project__header">
         <div class="project__close">
-          <NuxtLink :to="localePath('/portfolio')" class="project__close-btn">
+          <NuxtLink
+            :to="localePath('/portfolio')"
+            aria-label="Back to portfolio"
+            class="project__close-btn"
+          >
             <Icon name="ci:close-lg" />
           </NuxtLink>
         </div>
         <h1 class="project__title">{{ project?.title }}</h1>
       </div>
       <div class="project__body">
-        <ProjectSlider
-          :title="project!.title"
-          :gallery="project!.gallery"
-          class="project__content"
-        />
+        <div class="project__content">
+          <ProjectSlider
+            v-if="project!.gallery.length"
+            :title="project!.title"
+            :gallery="project!.gallery"
+          />
+          <div v-else class="project__content--empty">
+            {{ $t('portfolio.images_not_found') }}
+          </div>
+        </div>
         <ProjectSidebar :project="project!" class="project__sidebar" />
       </div>
     </div>
@@ -81,6 +90,10 @@ defineOgImage({
 
   &__content {
     @apply lg:col-span-4;
+  }
+
+  &__content--empty {
+    @apply rounded-2xl border-2 border-dashed border-dark-100 w-full h-full p-10 flex items-center justify-center text-xl font-semibold aspect-video;
   }
 
   // .project__sidebar
