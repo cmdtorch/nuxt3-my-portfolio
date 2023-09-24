@@ -36,7 +36,8 @@ const onSwiperInit = (swiper: any) => {
           :slides-per-group="3"
           :space-between="10"
           :autoplay="{
-            delay: 2000,
+            delay: 3000,
+            disableOnInteraction: false,
           }"
           :pagination="{
             el: '.skills__pagination',
