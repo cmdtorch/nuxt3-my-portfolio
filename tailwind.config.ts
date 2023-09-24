@@ -3,18 +3,19 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 const MyTheme = {
   colors: {
-    neonCarrot: {
-      DEFAULT: '#ff9638',
-      '50': '#fff7ed',
-      '100': '#ffeed4',
-      '200': '#ffd9a8',
-      '300': '#ffbd71',
-      '400': '#ff9638',
-      '500': '#fe7711',
-      '600': '#ef5c07',
-      '700': '#c64308',
-      '800': '#9d360f',
-      '900': '#7e2e10',
+    pictonBlue: {
+      DEFAULT: '#14a6c6',
+      '50': '#edfcfe',
+      '100': '#d2f6fb',
+      '200': '#abebf6',
+      '300': '#71ddef',
+      '400': '#48cae4',
+      '500': '#14a6c6',
+      '600': '#1385a7',
+      '700': '#176b87',
+      '800': '#1b586f',
+      '900': '#1b4a5e',
+      '950': '#0c2f40',
     },
     gray: {
       DEFAULT: '#666666',
@@ -38,7 +39,7 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
-        primary: MyTheme.colors.neonCarrot,
+        primary: MyTheme.colors.pictonBlue,
         dark: MyTheme.colors.gray,
         background: '#ffffff',
       },
