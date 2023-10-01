@@ -8,7 +8,7 @@ const { project } = defineProps<Props>()
 
 const dayjs = useDayjs()
 
-const date = dayjs(`${project.created_date}`).format('MM/DD/YYYY')
+const date = dayjs(`${project.created_date}`).format('DD/MM/YYYY')
 
 const { locale } = useI18n()
 </script>
@@ -30,7 +30,10 @@ const { locale } = useI18n()
             target="_blank"
             class="project-sidebar__apps--item"
           >
-            <NuxtImg :src="'images/google-play_' + locale + '.png'" />
+            <NuxtImg
+              :src="'images/google-play_' + locale + '.png'"
+              format="webp"
+            />
           </NuxtLink>
           <NuxtLink
             v-if="project.apple_url"
@@ -38,7 +41,10 @@ const { locale } = useI18n()
             target="_blank"
             class="project-sidebar__apps--item"
           >
-            <NuxtImg :src="'images/app-store_' + locale + '.png'" />
+            <NuxtImg
+              :src="'images/app-store_' + locale + '.png'"
+              format="webp"
+            />
           </NuxtLink>
         </div>
         <div v-if="project.site_url" class="project-sidebar__information--item">
@@ -75,6 +81,7 @@ const { locale } = useI18n()
   // .project-sidebar__title
 
   &__title {
+    @apply text-lg;
   }
 
   // .project-sidebar__information

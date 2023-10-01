@@ -14,14 +14,13 @@ const { project } = defineProps<Props>()
   <div class="portfolio-item">
     <div class="portfolio-item__wrapper">
       <div class="portfolio-item__frame">
-        <NuxtImg
+        <NuxtPicture
           class="portfolio-item__img"
           :src="`${publicEnv.apiBase}/${project.preview_image}`"
           :alt="project.title"
           :title="project.title"
-          :width="560"
+          sizes="sm:585px lg:480px xl:360px"
         />
-
         <NuxtLink
           :to="localePath(`/portfolio/${project.slug}`)"
           :aria-label="`Read more about ${project.title}`"
@@ -44,15 +43,17 @@ const { project } = defineProps<Props>()
 
 <style lang="scss" scoped>
 .portfolio-item {
-  &:hover {
-    .portfolio-item__frame {
-      @apply before:bg-dark-950/20;
-    }
-    .portfolio-item__img {
-      @apply scale-125;
-    }
-    .portfolio-item__taglist {
-      @apply opacity-100;
+  @media (min-width: 1024px) {
+    &:hover {
+      .portfolio-item__frame {
+        @apply before:bg-dark-950/20;
+      }
+      .portfolio-item__img {
+        @apply scale-125;
+      }
+      .portfolio-item__taglist {
+        @apply opacity-100;
+      }
     }
   }
   // .portfolio-item__wrapper
@@ -88,7 +89,7 @@ const { project } = defineProps<Props>()
   // .portfolio-item__taglist
 
   &__taglist {
-    @apply absolute z-20 flex gap-1 flex-wrap bottom-5 left-5  transition-opacity opacity-0;
+    @apply absolute z-20 flex gap-1 flex-wrap bottom-5 left-5  transition-opacity lg:opacity-0;
   }
 
   // .portfolio-item__tag
