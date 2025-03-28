@@ -1,38 +1,25 @@
 <script lang="ts" setup>
-import type { Testimonial } from '~/types'
-import { ApiEndpoints } from '~/utils/apiEndpoints'
+import type { Testimonial } from '@/types'
+import { ApiEndpoints } from '@/utils/apiEndpoints'
 
-const { data: testimonials, pending } = await useMyFetch<Testimonial[]>(
+const { data: testimonials, status } = await useMyFetch<Testimonial[]>(
   ApiEndpoints.TESTIMONIALS,
   {
     server: false,
     lazy: true,
-  }
+  },
 )
-const isMobile = useMediaQuery('not all and (min-width: 1024px)')
-
-const onSwiperInit = (swiper: any) => {
-  const { initDOM } = useAfterOutIn(() => {
-    swiper.pagination.enable()
-  })
-  initDOM()
-}
 </script>
 
 <template>
   <section class="testimonials">
-    <SiteSkeletonSection v-if="pending" :items="isMobile ? 1 : 2" />
-    <div
-      v-if="testimonials?.length"
-      :class="{ hidden: pending }"
-      class="testimonials__wrapper"
-    >
+    <SiteSkeletonSection v-show="status === 'pending'" />
+    <div v-show="testimonials?.length" class="testimonials__wrapper">
       <SiteTitle class="testimonials__title">{{
         $t('testimonials.title')
       }}</SiteTitle>
       <div class="testimonials__body">
         <Swiper
-          @swiper="onSwiperInit"
           class="testimonials__swiper"
           :modules="[SwiperAutoplay, SwiperPagination]"
           :slides-per-view="1"
@@ -52,9 +39,9 @@ const onSwiperInit = (swiper: any) => {
           }"
         >
           <SwiperSlide
-            class="testimonials__slide"
-            v-for="testimonial in testimonials"
+            v-for="testimonial of testimonials"
             :key="testimonial.full_name"
+            class="testimonials__slide"
           >
             <HomeTestimonialsItem
               :testimonial="testimonial"
@@ -64,7 +51,7 @@ const onSwiperInit = (swiper: any) => {
         </Swiper>
         <div
           class="testimonials__pagination swiper-pagination swiper-pagination-line"
-        ></div>
+        />
       </div>
     </div>
   </section>
@@ -117,7 +104,7 @@ const onSwiperInit = (swiper: any) => {
 
 .slide-up-enter-from,
 .slide-up-leave-to {
-  @apply opacity-0 translate-y-5;
+  @apply translate-y-5 opacity-0;
 }
 </style>
-~/utils/apiEndpoints
+@/utils/apiEndpoints

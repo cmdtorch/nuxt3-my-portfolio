@@ -21,6 +21,25 @@ const i18nHead = useLocaleHead({
   addSeoAttributes: true,
 })
 
+const headers = useRequestHeaders([
+  'x-forwarded-for',
+  'referer',
+  'sec-ch-ua-platform',
+  'user-agent',
+])
+
+if (import.meta.server) {
+  await useMyFetch(ApiEndpoints.VISIT, {
+    method: 'POST',
+    params: {
+      ip: headers['x-forwarded-for'],
+      referrer: headers['referer'],
+      platform: headers['sec-ch-ua-platform'],
+      user_agent: headers['user-agent'],
+    },
+  })
+}
+
 useSeoMeta({
   author: `${publicEnv.ownerName} ${publicEnv.ownerLastName}`,
   description: seoInfo.value?.meta_description,
@@ -29,14 +48,13 @@ useSeoMeta({
   ogDescription: seoInfo.value?.meta_description,
 })
 
-defineOgImage({
-  component: 'Main',
+defineOgImageComponent('Main', {
   description: seoInfo.value?.meta_description,
 })
 </script>
 
 <template>
-  <Html :lang="i18nHead.htmlAttrs!.lang" :dir="i18nHead.htmlAttrs!.dir">
+  <Html :lang="i18nHead.htmlAttrs?.lang" :dir="i18nHead.htmlAttrs?.dir">
     <Body>
       <div class="app">
         <LayoutsParallaxBackground class="app__parallax" />
@@ -84,6 +102,6 @@ defineOgImage({
 
 .slide-enter-from,
 .slide-leave-to {
-  @apply opacity-0 -translate-x-1/2;
+  @apply -translate-x-1/2 opacity-0;
 }
 </style>

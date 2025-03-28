@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { Experience } from '~/types'
+import type { Experience } from '@/types'
 
 const { data: experiences } = await useMyFetch<Experience[]>(
-  ApiEndpoints.EXPERIENCE
+  ApiEndpoints.EXPERIENCE,
 )
 </script>
 
@@ -14,7 +14,7 @@ const { data: experiences } = await useMyFetch<Experience[]>(
       }}</SiteTitle>
       <div class="experience__body">
         <HomeExperienceItem
-          v-for="experience in experiences"
+          v-for="experience of experiences"
           :key="experience.period"
           :experience="experience"
           class="experience__item"
